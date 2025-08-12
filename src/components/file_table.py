@@ -195,7 +195,7 @@ class FileTableWidget(QTableWidget):
             folder_path = os.path.dirname(file_path)
             
             if platform.system() == "Windows":
-                subprocess.run(["explorer", folder_path])
+                os.startfile(folder_path)
             elif platform.system() == "Darwin":  # macOS
                 subprocess.run(["open", folder_path])
             else:  # Linux
@@ -204,7 +204,7 @@ class FileTableWidget(QTableWidget):
             logger.info(f"已打开文件夹: {folder_path}")
             
         except Exception as e:
-            logger.error(f"打开文件夹失败 {folder_path}: {str(e)}")
+            logger.error(f"打开文件夹失败 {file_path}: {str(e)}")
             QMessageBox.warning(self, get_text("Warning"), 
                               f"{get_text('Failed to open folder')}: {str(e)}")
                               
